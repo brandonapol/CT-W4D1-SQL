@@ -1,0 +1,98 @@
+SELECT *
+FROM actor;
+
+-- 1.
+SELECT COUNT(last_name)
+FROM actor
+WHERE last_name = 'Wahlberg';
+
+-- Answer is 2 
+
+--2.
+SELECT COUNT(amount)
+FROM payment
+WHERE amount BETWEEN 3.99 AND 5.99;
+
+-- Answer is 5607
+
+SELECT *
+FROM inventory
+
+SELECT film_id, COUNT(film_id)
+FROM inventory
+GROUP BY film_id
+ORDER BY COUNT(film_id) DESC
+
+-- Item 8
+
+--4
+SELECT COUNT(last_name)
+FROM customer
+WHERE last_name LIKE 'William';
+
+--Pretty sure the answer is zero
+
+--5
+SELECT staff_id, COUNT(staff_id)
+FROM rental
+GROUP BY staff_id
+ORDER BY staff_id DESC;
+
+--Staff member 1 sold 8040 compared to staff member 2's 8004
+
+--6
+SELECT store_id, COUNT(DISTINCT store_id)
+FROM inventory
+GROUP BY store_id
+
+-- There are two stores
+
+--7
+SELECT *
+FROM film_actor
+
+
+SELECT actor_id, COUNT(DISTINCT actor_id)
+FROM film_actor
+GROUP BY actor_id
+ORDER BY actor_id
+
+-- 200 actors in film 1
+
+--8
+SELECT COUNT(store_id)
+FROM customer
+WHERE last_name = '_%es';
+
+-- got back zero
+
+--9
+--How many payment amounts (4.99, 5.99 etc) had a number of rentals above 250 for customers with ids between 380 and 430?
+--Use group by and having > 250
+-- SELECT column_name
+-- FROM table_name
+-- WHERE condition
+-- GROUP BY column_name
+-- HAVING condition
+-- ORDER BY column_name
+
+SELECT COUNT(amount)
+FROM payment
+GROUP BY customer_id BETWEEN 380 AND 430
+HAVING COUNT(rental_id) > 250;
+
+--13,339 payments? 
+
+-- film table: how many rating categories and which has the most content
+SELECT *
+FROM film
+
+SELECT COUNT(rating)
+FROM film
+GROUP BY rating
+ORDER BY rating ASC
+
+-- I assume this orders rating alphabetically? So presumably G, NR, PG, PG-13, R. 
+-- PG has the most. Would love feedback on how to get two columns to show so I can see which is which.
+
+
